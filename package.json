@@ -1,0 +1,30 @@
+{
+  "name": "cursotypescript",
+  "version": "1.0.0",
+  "description": "Primeros pasos en TypeScript",
+  "main": "index.js",
+  "scripts": {
+    "tsnode": "cd src && ts-node index.ts",
+    "start": "nodemon",
+    "transpilation": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josearodriguezdaw/CursoTypeScript.git"
+  },
+  "keywords": [
+    "typescript"
+  ],
+  "author": "josearodriguezdaw",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/josearodriguezdaw/CursoTypeScript/issues"
+  },
+  "homepage": "https://github.com/josearodriguezdaw/CursoTypeScript#readme",
+  "devDependencies": {
+    "@types/node": "^22.5.5",
+    "nodemon": "^3.1.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.2"
+  }
+}
