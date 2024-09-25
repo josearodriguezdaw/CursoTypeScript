@@ -57,7 +57,7 @@ Microsoft Visual Studio Code incluye algunas extensiones que pueden ser muy úti
 
 Para poder ejecutar el archivo TypeScript que hemos añadido a la carpeta src debemos lanzar el siguiente comando.
 
-`ts-node index.ts`
+`npm exec ts-node src/index.ts`
 
 La ejecución de los archivos .ts se puede automatizar un poco si creamos un nuevo script en el archivo package.json, cómo se puede observar en la siguiente línea:
 
