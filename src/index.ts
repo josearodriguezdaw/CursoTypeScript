@@ -257,3 +257,112 @@ do {
 }while(tarea1.estado != EstadoTarea.Completada);
 
 
+
+
+/**
+ * Funciones: nos permitirá crear bloque de códigos reutilizables.
+ * 
+ * funtion name (nameParam: type):{}
+ * 
+ */
+
+// Funciónes clásicas y documentación del código
+
+/**
+ * Muestra un saludo por consola a una persona
+ * @param nombre string nombre del usuario
+ * 
+ */
+function saludar (nombre:string){
+    console.log(`Hola ${nombre}, qué tal estas?`);
+
+}
+
+saludar("José Antonio");
+
+//Funciones con parámeros por defecto
+
+function saludarDefault (nombre:string = "Jose"){
+    console.log(`Hola ${nombre}, qué tal estas?`);
+}
+saludarDefault();
+saludarDefault("Juan");
+
+
+//Funciones con parámeros opcionales
+
+function saludarOpcional (nombre?:string){
+    let nombreParam = nombre;
+    if(nombreParam == undefined){
+        nombreParam = "Nombre Defecto";
+    }
+    console.log(`Hola ${nombreParam}, qué tal estas?`);
+
+}
+
+saludarOpcional();
+
+// Funciones con parámetros de varios tipos
+function variosTipos (a: string | number){
+    if (typeof(a) == "string"){
+        console.log("a es un string");
+    } else{
+        console.log("a es un number");
+    }
+}
+variosTipos(1);
+
+// Función con retorno: return
+function suma (a:number,b:number): number{
+    return a+b;
+}
+
+var resultadoSuma:number = suma(1,2);
+console.log(resultadoSuma);
+console.log(suma(1,2));
+
+
+// Funciones anónimas: no se especifica un nombre.
+/**
+ * Suma dos valores
+ * @param valor1 primer valor
+ * @param valor2 segundo valor
+ * @returns devuelve la suma de valor1 y valor2
+ */
+const funcRestar = function (valor1:number, valor2:number): number {
+    return valor1 - valor2;
+}
+
+/**
+ * Funciones, rest parameters (parámetros rest)
+ * Permite definir funciones que tomen un número indeterminado de argumentos
+ */
+function multiParam (...nombres: string[]):void{
+    nombres.forEach((nombre)  => {
+        console.log(nombre);
+    })
+}
+
+multiParam("Alex","Martin");
+
+// A las funciones rest también se le puede pasar una lista de elementos
+let listaNombres:string[] = ["Leandro","Francisco"];
+multiParam(...listaNombres);
+
+/**
+ * La diferencia entre usar una función que reciba como parámetro un array es que esta función recibe como parámetro una referencia al objeto.
+ * En cambio, con una función rest param lo que recibe como parámetro es cada uno de los elementos de la lista de forma individual.
+*/
+
+/**
+ * Las funciones arrow son una sintaxis compacta de definir funciones en JavaScript y TypeScript.
+ * Proporcionan una forma más breve y clara de escribir funciones en comparación con la sintaxis tradicional, 
+ * lo que mejora la legibilidad y mantiene la seguridad de los tipos.
+ * 
+ * (param1, param2, ..., paramN) => {}
+ */
+
+let getDatosTarea = (tarea:Tarea):string => {return `La tarea denominada ${tarea.nombre} cuyo estado es ${tarea.estado} tiene una prioridad ${tarea.prioridad} `}
+console.log(getDatosTarea(tarea1));
+
+
