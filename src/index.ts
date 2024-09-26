@@ -80,6 +80,7 @@ let misDatos = {
     edad: 18 
 }
 
+Object.keys('')
 //Propagación de la variable misDatos
 let misDatoProfesionales = {
     ...misDatos,
@@ -366,3 +367,57 @@ let getDatosTarea = (tarea:Tarea):string => {return `La tarea denominada ${tarea
 console.log(getDatosTarea(tarea1));
 
 
+/**
+ * Funciones CallBack
+ * Una función callback es una función que se pasa a otra función como parámetro y dentro de la misma es llamada.
+ * Hay que tener en cuenta que una función se trata como un objeto.
+ */
+
+//Ejemplo 1: 
+
+const funcionMuestra = function (){
+    console.log("CallBack desde función estándar");
+}
+
+setTimeout(funcionMuestra,100); // La función timeout llama a funciónMuestra después de 100ms
+
+// Ejemplo 2: paso de una función anónima
+setTimeout(function(){console.log("CallBack desde función anónima")},1000);
+
+// Ejemplo 3: paso de una función flecha
+
+setTimeout(()=>{console.log("CallBack desde función flecha")},500);
+
+
+// Ejemplo 4:
+
+let muestraDatos = function (a:string, b:number, c:string[]){
+    console.log(`Ejemplo 4 - ${a}`);
+}
+
+listaTareas.forEach(muestraDatos)
+
+listaTareas.forEach((valor:string,indice:number,datos:string[]) => {
+    console.log(`${valor}, mostrado desde función CallBack fecha`)
+})
+
+// Ejemplo 5: 
+
+let fsuma = function suma(a:number, b:number){
+    console.log("Llamada desde función opera")
+    return a+b;
+}
+
+let fresta = function resta(a:number,b:number){
+    return a-b;
+}
+// En este ejemplo estamos definiendo que la función opera espera recibir como parámetro una función CallBack
+// Concretamente, estamos diciendo que la función como entrada tiene que tener dos parámetros y devolver un número
+// Cuando se llama a dicha función CallBack desde la función principal se le pasan dichos parámetros y se vuelve a operar con el resultado
+
+function opera (x:number,y:number,callbackfuntion:(a:number,b:number)=> number){
+    return callbackfuntion(x,y);
+}
+
+opera(2,3,fsuma);
+opera(2,3,fresta)
