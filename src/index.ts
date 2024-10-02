@@ -263,7 +263,7 @@ do {
 /**
  * Funciones: nos permitirá crear bloque de códigos reutilizables.
  * 
- * funtion name (nameParam: type):{}
+ * funtion name (nameParam: type): Type return{}
  * 
  */
 
@@ -274,9 +274,8 @@ do {
  * @param nombre string nombre del usuario
  * 
  */
-function saludar (nombre:string){
+function saludar (nombre:string):void{
     console.log(`Hola ${nombre}, qué tal estas?`);
-
 }
 
 saludar("José Antonio");
@@ -318,7 +317,9 @@ function suma (a:number,b:number): number{
     return a+b;
 }
 
+// Podemos almacenar directamente el valor devuelto de la función en una variable
 var resultadoSuma:number = suma(1,2);
+
 console.log(resultadoSuma);
 console.log(suma(1,2));
 
@@ -343,7 +344,7 @@ function multiParam (...nombres: string[]):void{
         console.log(nombre);
     })
 }
-
+// Llamada a función multiparámetros
 multiParam("Alex","Martin");
 
 // A las funciones rest también se le puede pasar una lista de elementos
@@ -360,7 +361,7 @@ multiParam(...listaNombres);
  * Proporcionan una forma más breve y clara de escribir funciones en comparación con la sintaxis tradicional, 
  * lo que mejora la legibilidad y mantiene la seguridad de los tipos.
  * 
- * (param1, param2, ..., paramN) => {}
+ * (param1, param2, ..., paramN): Type return => {}
  */
 
 let getDatosTarea = (tarea:Tarea):string => {return `La tarea denominada ${tarea.nombre} cuyo estado es ${tarea.estado} tiene una prioridad ${tarea.prioridad} `}
@@ -404,7 +405,6 @@ listaTareas.forEach((valor:string,indice:number,datos:string[]) => {
 // Ejemplo 5: 
 
 let fsuma = function suma(a:number, b:number){
-    console.log("Llamada desde función opera")
     return a+b;
 }
 
@@ -421,6 +421,7 @@ function opera (x:number,y:number,callbackfuntion:(a:number,b:number)=> number){
 
 opera(2,3,fsuma);
 opera(2,3,fresta)
+
 
 
 /**
