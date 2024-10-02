@@ -421,3 +421,48 @@ function opera (x:number,y:number,callbackfuntion:(a:number,b:number)=> number){
 
 opera(2,3,fsuma);
 opera(2,3,fresta)
+
+
+/**
+ * Funciones asíncronas:
+ * 
+ * Toda función asíncrona debe devolver una promesa. ¿Qué es una promesa?
+ * Una promesa es una espectativa que sucederá en algún momento particular del futuro.
+ */
+
+/**
+ * En el siguiente ejemplo vamos a usar una función asíncrona para acceder a una API desde la que vamos a obtener un JSON.
+ * A continuación se indican algunas API públicas que se pueden consultar.
+ * 
+ * https://www.postman.com/cs-demo/public-rest-apis/folder/c89mnom/television
+ * http://universities.hipolabs.com/search?country=spain
+ * https://dog.ceo/api/breeds/image/random
+ */
+
+/**
+ * Funcion asíncrona que consulta una API que contiene un directorio de universidades de todo el mundo.
+ * @param pais pais sobre el que se quiere filtrar los resultados
+ * @returns devuelve un JSON.
+ */
+async function getDataFromAPI(pais:string) : Promise <any> {
+    
+    const apiURL:string = "http://universities.hipolabs.com/search?country=";
+
+    //Construimos la URL de la API a consultar concatenando el pais que se quiere filtrar
+    let url:string = `${apiURL}${pais}`;
+    
+    // Con la función fetch accedemos hacemos una petición GET y obtenemos los resultados. 
+    // Usamos await para indicar que hasta que no termine esta instrucción no se ejecuta la siguiente
+    let respuesta:Response = await fetch(url);
+
+    // Convertimos la respuesta de la petición GET en un archivo JSON
+    let datos:unknown = await respuesta.json();
+
+    // Cuando ha finalizado la conversión a JSON se devuelve el resultado. 
+    return datos ;
+}
+
+// Llamamos a la función asincrona y mostramos el JSON de las universidades existentes en Spain
+getDataFromAPI("Spain").then((data)=>{console.log(data)});
+
+console.log("Linea posterior a funcion async")
