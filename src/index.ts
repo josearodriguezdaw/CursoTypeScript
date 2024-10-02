@@ -466,4 +466,6 @@ async function getDataFromAPI(pais:string) : Promise <any> {
 // Llamamos a la función asincrona y mostramos el JSON de las universidades existentes en Spain
 getDataFromAPI("Spain").then((data)=>{console.log(data)});
 
+// Como curiosidad, podéis observar que esta línea se ejecuta antes aún estando después de la llamada a la API. 
+// Esto ocurre porque la función getDataFromAPI es una función asíncrona y muestra los resultados en el momento que termina su ejecución.
 console.log("Linea posterior a funcion async")
