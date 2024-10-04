@@ -440,13 +440,15 @@ opera(2,3,fresta)
  * https://dog.ceo/api/breeds/image/random
  */
 
+
+
 /**
  * Funcion asíncrona que consulta una API que contiene un directorio de universidades de todo el mundo.
  * @param pais pais sobre el que se quiere filtrar los resultados
  * @returns devuelve un JSON.
  */
-async function getDataFromAPI(pais:string) : Promise <any> {
-    
+async function getUniversitiesAsync(pais:string) : Promise <JSON[]> {
+    let index:number = 0;
     const apiURL:string = "http://universities.hipolabs.com/search?country=";
 
     //Construimos la URL de la API a consultar concatenando el pais que se quiere filtrar
@@ -455,17 +457,68 @@ async function getDataFromAPI(pais:string) : Promise <any> {
     // Con la función fetch accedemos hacemos una petición GET y obtenemos los resultados. 
     // Usamos await para indicar que hasta que no termine esta instrucción no se ejecuta la siguiente
     let respuesta:Response = await fetch(url);
-
     // Convertimos la respuesta de la petición GET en un archivo JSON
-    let datos:unknown = await respuesta.json();
-
-    // Cuando ha finalizado la conversión a JSON se devuelve el resultado. 
-    return datos ;
+    let datos:Promise<JSON[]> = await respuesta.json() as Promise<JSON[]>;
+    return datos
 }
+ 
 
 // Llamamos a la función asincrona y mostramos el JSON de las universidades existentes en Spain
-getDataFromAPI("Spain").then((data)=>{console.log(data)});
+getUniversitiesAsync("Spain").then((data)=>{console.log(data[1])});
 
 // Como curiosidad, podéis observar que esta línea se ejecuta antes aún estando después de la llamada a la API. 
 // Esto ocurre porque la función getDataFromAPI es una función asíncrona y muestra los resultados en el momento que termina su ejecución.
 console.log("Linea posterior a funcion async")
+
+/**
+ * FUNCIONES GENERADORAS:
+ * Una función generadora es una función que se puede pausar y reanudar, y por lo tanto, nos puede devolver múltiples valores.
+ * Para poder declarar una función generadora es necesario añadir el * después de la palabra reservada function. 
+ * Observa que en lugar de llamar a return para devolver un valor, utilizamos yield.
+ * Fuente:https://lenguajejs.com/javascript/funciones/generadores/
+ */
+
+// Ejemplo 1: Función que itera elementos de un array y los devuelve
+
+function* fGenTareas (): Generator<Tarea>{
+
+    let tareas: Tarea[] = [... listadoTareas]
+
+    for(let i in tareas){
+        yield tareas[i];
+    }
+    // No es posible usar la función foreach porque al ser una función callback no se puede usar con yield.
+}
+
+// Preparamos nuestra función generadora
+const genTareas = fGenTareas();
+console.log(genTareas.next()); // Accedemos al primer valor del array
+
+// Podemos obtener todos los valores de nuestra función generadora usando el operador spread
+
+const getAllTareas = [...fGenTareas()];
+console.log(getAllTareas);
+
+
+
+// EJEMPLO 2: función generadora y asíncrona que accede a una API y devuelve cada uno de los elementos del array JSON.
+/**
+ * Funcion generadora y asíncrona que devuelve páginas web que han sufrido alguna brecha de seguridad
+ */
+async function* generatorGetBreaches():AsyncGenerator<JSON> {
+
+    let respuesta:Response = await fetch("https://haveibeenpwned.com/api/v2/breaches");
+    // Convertimos la respuesta de la petición GET en un archivo JSON
+    let datos: JSON[]= await respuesta.json() as JSON[]
+    
+    for(let i in datos){
+        yield datos[i]
+    }
+    
+    
+}
+
+const valoresUniversidades = generatorGetBreaches();
+valoresUniversidades.next().then(({value,done}) => {console.log(value['Title']); console.log(done);});
+valoresUniversidades.next().then(({value,done}) => {console.log(value['Title']); console.log(done);});
+
