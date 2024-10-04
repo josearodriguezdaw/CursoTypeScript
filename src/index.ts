@@ -505,11 +505,18 @@ console.log(getAllTareas);
 /**
  * Funcion generadora y asíncrona que devuelve páginas web que han sufrido alguna brecha de seguridad
  */
-async function* generatorGetBreaches():AsyncGenerator<JSON> {
+
+type Website = {
+    Name:string,
+    Title:string,
+    Domain: string,
+    Description:string
+}
+async function* generatorGetBreaches():AsyncGenerator<Website> {
 
     let respuesta:Response = await fetch("https://haveibeenpwned.com/api/v2/breaches");
     // Convertimos la respuesta de la petición GET en un archivo JSON
-    let datos: JSON[]= await respuesta.json() as JSON[]
+    let datos: Website[]= await respuesta.json() as Website[]
     
     for(let i in datos){
         yield datos[i]
@@ -519,6 +526,6 @@ async function* generatorGetBreaches():AsyncGenerator<JSON> {
 }
 
 const valoresUniversidades = generatorGetBreaches();
-valoresUniversidades.next().then(({value,done}) => {console.log(value['Title']); console.log(done);});
-valoresUniversidades.next().then(({value,done}) => {console.log(value['Title']); console.log(done);});
+valoresUniversidades.next().then(({value,done}) => {console.log(`${value.Name} - ${value.Description}  \n`); console.log(`Is the last element? ${done} \n`);});
+valoresUniversidades.next().then(({value,done}) => {console.log(`${value.Name} - ${value.Description} \n`); console.log(`Is the last element? ${done} \n`);});
 
