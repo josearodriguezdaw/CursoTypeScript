@@ -1,4 +1,7 @@
+import Cookies from 'js-cookie'
+
 // Sintasis básica de TypeScript
+
 
 /**
  * En este archivo iremos añadiendo líneas de código 
@@ -496,8 +499,8 @@ console.log(genTareas.next()); // Accedemos al primer valor del array
 
 // Podemos obtener todos los valores de nuestra función generadora usando el operador spread
 
-const getAllTareas = [...fGenTareas()];
-console.log(getAllTareas);
+// const getAllTareas = [...fGenTareas()];
+// console.log(getAllTareas);
 
 
 
@@ -528,4 +531,131 @@ async function* generatorGetBreaches():AsyncGenerator<Website> {
 const valoresUniversidades = generatorGetBreaches();
 valoresUniversidades.next().then(({value,done}) => {console.log(`${value.Name} - ${value.Description}  \n`); console.log(`Is the last element? ${done} \n`);});
 valoresUniversidades.next().then(({value,done}) => {console.log(`${value.Name} - ${value.Description} \n`); console.log(`Is the last element? ${done} \n`);});
+
+/**
+ * Sobrecarga de funciones:
+ * La sobrecarga de funciones permite declarar varias versiones de una función con diferentes parámetros y tipos de retorno. 
+ * Cada versión de la función (o firma) se llama sobrecarga.
+ * 
+ * Para crear sobrecargas de funciones en TypeScript debemos hacer lo siguiente
+ * 1. Definir las firmas de las funciones sobrecargadas.
+ * 2. Proveer una única implementación de la función que maneje todas las combinaciones de parámetros.
+ * Fuente:  https://www.luisllamas.es/typescript-sobrecarga-de-funciones/
+*/
+
+// Definición de sobrecargas
+// En este ejemplo, la función miFuncion tiene dos firmas: una que acepta un string y otra que acepta un number. 
+// La implementación de la función maneja ambas firmas.
+
+
+function funcionSobrecarga(param: string): string;
+function funcionSobrecarga(param: number): number;
+
+// Implementación de la función
+function funcionSobrecarga(param: string | number): string | number {
+    // hacer cosas
+
+    return "";
+}
+funcionSobrecarga(12);   // esto no da error
+funcionSobrecarga("12")  // esto no da error
+
+// Sobrecarga con diferentes tipos de parámetros.
+
+function funcionSobrecargaDiffParam(a: string, b: string): string;
+function funcionSobrecargaDiffParam(a: number, b: number): number;
+
+// Implementación de la función
+function funcionSobrecargaDiffParam(a: string | number, b: string | number): string | number {
+    if (typeof a === "string" && typeof b === "string") {
+        return a + b;
+    } else if (typeof a === "number" && typeof b === "number") {
+        return a + b;
+    }
+    throw new Error("Tipos de parámetros no coinciden");
+}
+
+console.log(funcionSobrecargaDiffParam("Hola, ", "mundo")); // "Hola, mundo"
+console.log(funcionSobrecargaDiffParam(5, 10)); // 15
+//console.log(funcionSobrecargaDiffParam("Hola", 10)); //ERROR
+
+funcionSobrecarga(13)
+
+//Sobrecarga con diferentes cantidades de parámetros
+// Definición de sobrecargas
+function mostrarMensaje(mensaje: string): void;
+function mostrarMensaje(mensaje: string, veces: number): void;
+
+// Implementación de la función
+function mostrarMensaje(mensaje: string, veces?: number): void {
+    if (veces === undefined) {
+        console.log(mensaje);
+    } else {
+        for (let i = 0; i < veces; i++) {
+            console.log(mensaje);
+        }
+    }
+}
+
+mostrarMensaje("Hola"); // "Hola"
+mostrarMensaje("Hola", 3); // "Hola" "Hola" "Hola"
+
+/***
+ * PERSISTENCIA DE DATOS:
+ * 
+ *  1. LocalStorage: Almacena datos en el navegador que no se elminan automaticamente
+ *  2. SessionStorage: Los datos persisten durante la sesión del navegador.
+ *  3. Cookies: Almacenan los datos durante un tiempo determinado, es decir, los datos tienen una fecha de caducidad.
+ *  Además, las cookies pertenencen a un ámbito.
+ * 
+ * Todos estos datos son accesibles desde las herramientas de desarrollo del navegador.
+ */
+
+// 1. LOCALSTORAGE Y SESSIONSTORAGE
+
+function setDatosLocalStorage(key:string,value:string):void {
+    try {
+        localStorage.setItem(key,value);
+    } catch (error) {
+        console.error("LocalStorage no definido");
+    }
+}
+
+function getDatosLocalStorage(key:string):string{
+    
+    try {
+        let dato:string | null = localStorage.getItem(key);
+        if (dato!=null){
+            return dato;
+        }
+    } catch (error) {
+        console.error("LocalStorage no definido")
+    }
+    throw new Error ("No se ha encontrado la key indicada");
+
+}
+//setDatosLocalStorage("nombre","JoseA");
+//console.log(getDatosLocalStorage("nombre"));
+
+
+// COOKIES
+/**
+ * 3. COOKIES
+ * Para gestionar las cookies del navegador importaremos un módulo en nuestro proyecto.
+ * Concretamente, usaremos este: https://www.npmjs.com/package/js-cookie
+ * Para importar el módulo: npm i @types/js-cookie js-cookie --save-dev
+ * Una vez instalado el módulo lo importamos: import Cookies from 'js-cookie'
+ * Los atributos que puede tener una cookie son:
+ * - expires: define cuándo será la cookie borrada. Debe ser un número que indica los días que deben transcurrir desde la fecha de creación.
+ * - path: ruta donde la cookie será visible
+ * - domain: dominio donde la cookie será visible 
+ * - secure: la información de la cookie se enviará de manera cifrada mediante HTTPS si se establece como true
+ * - samesite (strict | lax): si se establece como strict no se admitirán cookies recibidas desde otros dominios, solo aquellas cookies generadas por el dominio indicado en la configuracion. 
+ */
+
+  
+
+Cookies.set('name', 'value', {domain:'domain.example',expires:1,path:"/",sameSite:'Strict',secure:false})
+Cookies.get('name')
+Cookies.remove("name");
 
