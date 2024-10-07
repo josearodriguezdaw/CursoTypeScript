@@ -111,7 +111,7 @@ Para poder beneficiarnos de la funcionalidad de WebPack es necesario instalar lo
 ### Configuración de WebPack
 
 Una vez instalado, es necesario crear un archivo llamado webpack.config.js, donde algunas opciones sobre cómo se realizará el empaquetado de nuestra aplicación. Concretamente, este archivo debe contener lo siguiente:
-
+```javascript
 const path = require('path');
 module.exports = {
   mode:"development",
@@ -139,7 +139,7 @@ module.exports = {
     port: 9000
   }
 };
-
+```
 ### Empaquetado y despliegue
 
 Para poder hacer uso de WebPack será necesario primeramente empaquetar todo el código y posteriormente desplegarlo en un servidor web. Para ello, debemos ejecutar los siguientes comandos en la terminal de nuestro proyecto:
@@ -149,6 +149,8 @@ Para poder hacer uso de WebPack será necesario primeramente empaquetar todo el 
 Tras lanzar esta primera línea en la terminar podemos observar que se ha creado una nueva carpeta en nuestro proyecto llamada "dist" la cual contiene un archivo bundle.js con todo el código JavaScript necesario para desplegar nuestra aplicación. 
 
 Para poder probar dicho código, vamos a importarlo en un documento index.html que crearemos dentro de la carpeta /dist y contendrá lo siguiente:
+
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -161,6 +163,7 @@ Para poder probar dicho código, vamos a importarlo en un documento index.html q
 <body>
 </body>
 </html>
+```
 
 Por último, para desplegar la carpeta /dist en un servidor de aplicaciones usaremos la siguiente línea:
 
