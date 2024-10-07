@@ -145,6 +145,7 @@ module.exports = {
 Para poder hacer uso de WebPack será necesario primeramente empaquetar todo el código y posteriormente desplegarlo en un servidor web. Para ello, debemos ejecutar los siguientes comandos en la terminal de nuestro proyecto:
 
 `npm exec webpack build`
+
 ![Build webpack](https://raw.githubusercontent.com/josearodriguezdaw/CursoTypeScript/ed261e57739c3ee2220117f536858c187da724b0/resources/images/build.png "Build webpack")
 
 Tras lanzar esta primera línea en la terminar podemos observar que se ha creado una nueva carpeta en nuestro proyecto llamada "dist" la cual contiene un archivo bundle.js con todo el código JavaScript necesario para desplegar nuestra aplicación. 
