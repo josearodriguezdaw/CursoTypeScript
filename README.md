@@ -172,6 +172,8 @@ Por último, para desplegar la carpeta /dist en un servidor de aplicaciones usar
 
 `npm exec webpack serve`
 
+En la siguiente imagen se puede observar como se indica en la terminal la url dónde se ha desplegado nuestra APP.
+
 ![Execute Webpack serve](https://raw.githubusercontent.com/josearodriguezdaw/CursoTypeScript/ed261e57739c3ee2220117f536858c187da724b0/resources/images/exec-webpack-serve.png "Execute Webpack serve")
 
 NOTA: Para aguilizar la ejecución de estos dos comandos podemos crear dos nuevos scripts en el archivo package.json. 
