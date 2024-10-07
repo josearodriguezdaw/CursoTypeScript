@@ -145,6 +145,7 @@ module.exports = {
 Para poder hacer uso de WebPack será necesario primeramente empaquetar todo el código y posteriormente desplegarlo en un servidor web. Para ello, debemos ejecutar los siguientes comandos en la terminal de nuestro proyecto:
 
 `npm exec webpack build`
+![Build webpack](https://raw.githubusercontent.com/josearodriguezdaw/CursoTypeScript/ed261e57739c3ee2220117f536858c187da724b0/resources/images/build.png "Build webpack")
 
 Tras lanzar esta primera línea en la terminar podemos observar que se ha creado una nueva carpeta en nuestro proyecto llamada "dist" la cual contiene un archivo bundle.js con todo el código JavaScript necesario para desplegar nuestra aplicación. 
 
@@ -164,13 +165,17 @@ Para poder probar dicho código, vamos a importarlo en un documento index.html q
 </body>
 </html>
 ```
+![Creación archivo html](https://raw.githubusercontent.com/josearodriguezdaw/CursoTypeScript/ed261e57739c3ee2220117f536858c187da724b0/resources/images/create-html.png "Creación archivo html")
 
 Por último, para desplegar la carpeta /dist en un servidor de aplicaciones usaremos la siguiente línea:
 
 `npm exec webpack serve`
 
+![Execute Webpack serve](https://raw.githubusercontent.com/josearodriguezdaw/CursoTypeScript/ed261e57739c3ee2220117f536858c187da724b0/resources/images/exec-webpack-serve.png "Execute Webpack serve")
+
 NOTA: Para aguilizar la ejecución de estos dos comandos podemos crear dos nuevos scripts en el archivo package.json. 
 
 `"build": "webpack",`
 `"start-web": "webpack serve"`
-    
+
+![Configuración nuevos comandos](https://raw.githubusercontent.com/josearodriguezdaw/CursoTypeScript/ed261e57739c3ee2220117f536858c187da724b0/resources/images/add-scripts.png "Configuración nuevos comandos")
