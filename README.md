@@ -97,3 +97,77 @@ Si queremos transpilar nuestro código typescript a javascript debemos usar el t
 Para facilitar esta operación también se puede añadir un comando y se lanzaría la transpilación usando:
 
 `npm run transpilation`
+
+## 12. Configuración de WebPack
+Durante el desarrollo de nuestra aplicación con TypeScript hemos realizado la instalación e importación de diferentes módulos/dependencias que aportan una funcionalidad extra a nuestra APP. Estos módulos han sido instalados en Node, por lo que necesitamos de una herramienta que empaquete dichos módulos en un único archivo para poder desplegar nuestro proyecto en un servidor web. Todo esto lo podremos realizar gracias a WebPack.
+### ¿Qué es WebPack?
+Webpack es un empaquetador de módulos, es decir, te permite generar un achivo único con todos aquellos módulos que necesita tu aplicación para funcionar. Para darte una idea, te permite incluir todos tus archivos javascript .js en un único archivo, incluso se pueden incluir hasta archivos de estilos .css en el mismo archivo, llamado *.bundle.js. Además, se puede realizar otras tareas de optimización de los códigos, tales como la minificación y la compresión.
+
+### Instalación de WebPack
+Para poder beneficiarnos de la funcionalidad de WebPack es necesario instalar los siguientes módulos usando npm:
+
+` npm i npm install --save-dev webpack webpack-cli webpack-dev-server typescript ts-loader `
+
+### Configuración de WebPack
+
+Una vez instalado, es necesario crear un archivo llamado webpack.config.js, donde algunas opciones sobre cómo se realizará el empaquetado de nuestra aplicación. Concretamente, este archivo debe contener lo siguiente:
+
+const path = require('path');
+module.exports = {
+  mode:"development",
+  entry: './src/index.ts',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+  },
+  devtool: 'source-map',
+  devServer: {
+    static: path.join(__dirname, 'dist'),
+    compress: true,
+    port: 9000
+  }
+};
+
+### Empaquetado y despliegue
+
+Para poder hacer uso de WebPack será necesario primeramente empaquetar todo el código y posteriormente desplegarlo en un servidor web. Para ello, debemos ejecutar los siguientes comandos en la terminal de nuestro proyecto:
+
+`npm exec webpack build`
+
+Tras lanzar esta primera línea en la terminar podemos observar que se ha creado una nueva carpeta en nuestro proyecto llamada "dist" la cual contiene un archivo bundle.js con todo el código JavaScript necesario para desplegar nuestra aplicación. 
+
+Para poder probar dicho código, vamos a importarlo en un documento index.html que crearemos dentro de la carpeta /dist y contendrá lo siguiente:
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Curso TypeScript IES Carillo</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <script src="bundle.js"></script>
+</head>
+<body>
+</body>
+</html>
+
+Por último, para desplegar la carpeta /dist en un servidor de aplicaciones usaremos la siguiente línea:
+
+`npm exec webpack serve`
+
+NOTA: Para aguilizar la ejecución de estos dos comandos podemos crear dos nuevos scripts en el archivo package.json. 
+
+`"build": "webpack",`
+`"start-web": "webpack serve"`
+    
