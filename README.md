@@ -182,3 +182,7 @@ NOTA: Para aguilizar la ejecución de estos dos comandos podemos crear dos nuevo
 `"start-web": "webpack serve"`
 
 ![Configuración nuevos comandos](https://raw.githubusercontent.com/josearodriguezdaw/CursoTypeScript/ed261e57739c3ee2220117f536858c187da724b0/resources/images/add-scripts.png "Configuración nuevos comandos")
+
+Si accedemos a nuestro servidor de aplicaciones, haciendo clic en algunos de los enlaces anteriores mostrados en la terminal, se mostrará nuestra APP desplegada. Para poder verificar que se está ejecutando correctamente todo nuestro código TypeScript, previamente transpilado a JavaScript, podemos acceder a la herramienta para desarrolladores del navegador (CTRL + MAYUS + I) y verificar que aparecen todos los logs en la pestaña "Consola"
+
+![Consola APP Desplegada](https://raw.githubusercontent.com/josearodriguezdaw/CursoTypeScript/ed261e57739c3ee2220117f536858c187da724b0/resources/images/web-consola.png "Consola APP Desplegada")
