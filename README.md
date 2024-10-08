@@ -186,3 +186,55 @@ NOTA: Para aguilizar la ejecución de estos dos comandos podemos crear dos nuevo
 Si accedemos a nuestro servidor de aplicaciones, haciendo clic en algunos de los enlaces anteriores mostrados en la terminal, se mostrará nuestra APP desplegada. Para poder verificar que se está ejecutando correctamente todo nuestro código TypeScript, previamente transpilado a JavaScript, podemos acceder a la herramienta para desarrolladores del navegador (CTRL + MAYUS + I) y verificar que aparecen todos los logs en la pestaña "Consola"
 
 ![Consola APP Desplegada](https://raw.githubusercontent.com/josearodriguezdaw/CursoTypeScript/refs/heads/main/resources/images/web-consola.png "Consola APP Desplegada")
+
+## 13. Depuración del código usando Visual Studio Code
+
+La depuración del código fuente es una práctica muy común ya que les permite a los programadores estudiar el código fuente con el objetivo de encontrar y solucionar errores. 
+
+Para poder depurar el código de nuestra aplicación primeramente debemos establecer un breakpoint o punto de interrupción. Los puntos de interrupción establecen dónde se quiere pausar la ejecución del depurador. 
+
+Para establecer un punto de interrupción hacemos clic justo a la izquierda del número de la línea en la que queremos que se pare el depurador.
+
+![Establecer BreakPoint](https://github.com/josearodriguezdaw/CursoTypeScript/refs/heads/main/resources/images/debug-breakpoint.png "Establecer BreakPoint")
+ 
+Una vez establecido el punto de interrupción, el siguiente paso será ejecutar nuestra aplicación en modo depuración. Para ello, hacemos clic en Run > Start Debugging, tras lo cual, se nos abrirá la vista de depuración.
+
+![Iniciar depuración](https://github.com/josearodriguezdaw/CursoTypeScript/refs/heads/main/resources/images/debug-start.png "Iniciar depuración")
+ 
+En la vista de depuración seleccionamos en el desplegable que se ejecute la aplicación con Node.js (1) y en la ventana que se abre seleccionamos el script “start” (2), el cual ejecutará nuestro proyecto. Por último, le damos al botón play (3).
+ 
+![Ejecutar código en modo depuración](https://github.com/josearodriguezdaw/CursoTypeScript/refs/heads/main/resources/images/debug-run.png "Ejecutar código en modo depuración")
+ 
+Tras realizar estos pasos se ejecutará nuestro código y la ejecución parará en la línea en la que hemos establecido el punto de interrupción.
+ 
+![Debug pausado](https://raw.githubusercontent.com/josearodriguezdaw/CursoTypeScript/refs/heads/main/resources/images/debug-pause.png "Debug pausado")
+
+Podemos navegar por cada una de las líneas de nuestro código haciendo uso del siguiente menú:
+ 
+![Menú de debug](https://raw.githubusercontent.com/josearodriguezdaw/CursoTypeScript/refs/heads/main/resources/images/debug-menu.png "Menú de debug")
+
+Cada uno de los botones realiza lo siguiente:
+-	Continue: continua la ejecución del código. Si existe algún otro punto de interrupción posterior se parará en este.
+
+-	Step over: el depurador ejecuta la línea actual y se pausa en la siguiente línea de código.
+
+-	Step into: si la línea en la que se encuentra el depurador es una función entrará dentro de dicha función.
+
+-	Step out: el depurador continuará con la ejecución del código hasta salir de la función en la que se encuentre. Esto permitirá omitir las líneas restantes de la función actual y regresar al contexto desde donde fue llamado.
+
+-	Restart: reinicia la ejecución del depurador
+
+-	Stop: para la ejecución del código.
+
+Como hemos mencionado anteriormente, durante la ejecución del código en modo depuración Visual Studio muestra la vista de depuración. En el lateral de dicha vista existen diferentes secciones de gran utilidad:
+ 
+![Vista de debug](https://raw.githubusercontent.com/josearodriguezdaw/CursoTypeScript/refs/heads/main/resources/images/debug-view.png "Vista de debug")
+
+
+- Variables: muestras el valor de todas las variables de nuestra aplicación.
+
+- Watch: nos permite añadir expresiones y hacer un seguimiento del valor que va tomando dichas expresiones. Por ejemplo, podemos añadir el identificador de una variable concreta para hacer un seguimiento del valor que va tomando dicha variable.
+
+- Breakpoints: Muestra todos los puntos de interrupción que han sido configurados en nuestro código.
+
+
