@@ -195,15 +195,15 @@ Para poder depurar el código de nuestra aplicación primeramente debemos establ
 
 Para establecer un punto de interrupción hacemos clic justo a la izquierda del número de la línea en la que queremos que se pare el depurador.
 
-![Establecer BreakPoint](https://github.com/josearodriguezdaw/CursoTypeScript/refs/heads/main/resources/images/debug-breakpoint.png "Establecer BreakPoint")
+![Establecer BreakPoint](https://raw.githubusercontent.com/josearodriguezdaw/CursoTypeScript/refs/heads/main/resources/images/debug-breakpoint.png "Establecer BreakPoint")
  
 Una vez establecido el punto de interrupción, el siguiente paso será ejecutar nuestra aplicación en modo depuración. Para ello, hacemos clic en Run > Start Debugging, tras lo cual, se nos abrirá la vista de depuración.
 
-![Iniciar depuración](https://github.com/josearodriguezdaw/CursoTypeScript/refs/heads/main/resources/images/debug-start.png "Iniciar depuración")
+![Iniciar depuración](https://raw.githubusercontent.com/josearodriguezdaw/CursoTypeScript/refs/heads/main/resources/images/debug-start.png "Iniciar depuración")
  
 En la vista de depuración seleccionamos en el desplegable que se ejecute la aplicación con Node.js (1) y en la ventana que se abre seleccionamos el script “start” (2), el cual ejecutará nuestro proyecto. Por último, le damos al botón play (3).
  
-![Ejecutar código en modo depuración](https://github.com/josearodriguezdaw/CursoTypeScript/refs/heads/main/resources/images/debug-run.png "Ejecutar código en modo depuración")
+![Ejecutar código en modo depuración](https://raw.githubusercontent.com/josearodriguezdaw/CursoTypeScript/refs/heads/main/resources/images/debug-run.png "Ejecutar código en modo depuración")
  
 Tras realizar estos pasos se ejecutará nuestro código y la ejecución parará en la línea en la que hemos establecido el punto de interrupción.
  
