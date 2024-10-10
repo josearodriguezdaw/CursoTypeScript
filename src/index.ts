@@ -659,3 +659,55 @@ Cookies.set('name', 'value', {domain:'domain.example',expires:1,path:"/",sameSit
 Cookies.get('name')
 Cookies.remove("name");
 
+
+
+/**
+ * Selección de los elementos del  DOM (Document Object Model)
+ * Usando TypeScript podremos acceder a los elementos del DOM, así como a sus atributos. 
+ * Para ello, usaremos el objeto "document" el cual, representa al DOM, y cuenta con varias funciones que nos permitirán acceder a los elementos pasándole como referencia su identificador o clase. 
+ * Las funciones que usaremos para acceder a los elementos son:
+ * 
+ * document.getElementById("id_elemento"); -> Accede al elemento cuyo id se ha pasado como parámetro.
+ * document.getElementsByClassName("clase_element"); -> Devuelve un array de elementos que tengan la misma clase
+ * document.getElementsByName() -> Devuelve un array de elementos cuyo nombre coincida con el pasado por parámetro.
+ * document.getElementsByTagName(); -> Devueelve un array de elementos cuyo nombre de etiqueta coincida con el pasado por parámetro.
+ * document.querySelection();
+ * document.querySelectionAll();
+ */
+
+
+const div = document.getElementById("form-curso");
+
+/**
+ * Cuando usamos la función getElementsById, ByClassName o ByName, TypeScript no sabe qué a qué tipo de elemento HTML estamos accediendo.
+ * Es por ello, por lo que devolverá un tipo genérico llamado HTMLElement.
+ * Podemos hacer un casting a algunos de los siguientes tipos:
+ * HTMLInputElement
+ * HTMLAnchorElement
+ * HTMLTextAreaElement
+ * HTMLDataListElement
+ * HTMLButtonElement
+ * HTMLOListElement
+ * HTMLUListElement
+ * HTMLLIElement
+ * Cada uno de estos objetos de TypeScript tendrá las propiedades específicas del elemento HTML
+ */
+
+// Accedemos al input.
+const inputContent = document.getElementById("input-content") as HTMLInputElement;
+
+// En este caso, el botón tiene un nombre y el método devuelve un array de elementos debido a que en un documento HTML
+// pueden existir más de un elemento con el mismo nombre. 
+// Como yo sé que solo hay un elemento, accedo a la primera posición del array.
+
+const btnAddContent = document.getElementsByName("btn-add-content")[0] as HTMLButtonElement;
+
+// Vamos a acceder a la lista de elementos existente cuyo id="lista-contenidos"
+
+const listaContenidos = document.getElementById("lista-contenidos") as HTMLOListElement;
+
+const liElementos = listaContenidos.getElementsByTagName("li") as HTMLCollectionOf<HTMLLIElement>;
+
+const listaContenidosQuery = document.querySelector("#lista-contenidos");
+const liElementosQuery = document.querySelectorAll("#lista-contenidos>li");
+
