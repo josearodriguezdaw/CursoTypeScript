@@ -711,3 +711,34 @@ const liElementos = listaContenidos.getElementsByTagName("li") as HTMLCollection
 const listaContenidosQuery = document.querySelector("#lista-contenidos");
 const liElementosQuery = document.querySelectorAll("#lista-contenidos>li");
 
+
+/**
+ * Clases:
+ *  TypeScript se trata de un lenguaje orientado a objetos y por ello nos permitirá trabajar con diferentes 
+ *  tipos de objetos, algunos de los cuales, han sido definidos a través de clases.
+ *  
+ *  Todas las clases son públicas por defecto, por lo que a diferencia de Java no es necesario porner el public
+ *
+ * - Creación de clases: propiedades, constructores.
+ * - Creación de objetos.
+ * - Exporatación e importación de clases.
+ * - Getter y Setter.
+ * - Atributos privados.
+ * - Modificador readonly atributos.
+ *  
+ *
+*/
+
+import {Curso} from "./models/Curso"
+import {Estudiante} from "./models/Estudiante"
+
+
+let cursoDAW = new Curso("Desarrollo de Aplicaciones Web",2000);
+let cursoDAM = new Curso("Desarrollo de Aplicaciones Multiplataforma",2000);
+
+let listCursosMatriculados = [cursoDAM,cursoDAM];
+
+let alumnoJose = new Estudiante("Jose Antonio", listCursosMatriculados, "Rodriguez");
+alumnoJose.cursos.forEach((curso:Curso) => {console.log(`El alumno Jose está matriculado en el curso ${curso.nombre}`)})
+
+
