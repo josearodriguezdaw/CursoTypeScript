@@ -712,6 +712,46 @@ const listaContenidosQuery = document.querySelector("#lista-contenidos");
 const liElementosQuery = document.querySelectorAll("#lista-contenidos>li");
 
 
+/** 
+ * Ejemplo práctico acceso, manejo y eventos en el DOM.
+ * El objetivo de este ejemplo práctico es trabajar con el DOM del archivo index.html
+ * para que cuando se escriba un nuevo contenido en el input, este pueda ser añadido tras
+ * pulsar el botón. 
+ * 
+ * Si la cadena de texto recuperada está vacía, se mostrará un mensaje de error.
+ * 
+ * */ 
+
+
+    btnAddContent.addEventListener('click', (evento:Event) => {
+        const inputContent:HTMLInputElement = document.getElementById("input-contenido") as HTMLInputElement;
+        let liElementos:HTMLOListElement = document.querySelector("#lista-contenidos") as HTMLOListElement;
+        let pErrores:HTMLParagraphElement = document.querySelector("#p-errores") as HTMLParagraphElement;
+
+        //Borramos todos los errores anteriores
+        pErrores.innerText ="";
+
+        if (inputContent != undefined){
+            let textoInput = inputContent.value;
+            if (textoInput.trim() != ""){
+                let nuevoContenido = document.createElement('li');
+                nuevoContenido.innerText = textoInput;
+                if (liElementos != undefined){
+                    liElementos.appendChild(nuevoContenido);
+                }else{
+                    pErrores.innerText = "Se ha producido un error al añadir el elemento."
+                    pErrores.setAttribute("style","color:red; font-weight:bold");
+                }
+            }else{
+                pErrores.innerText = "El texto indicado está vacío.";
+                pErrores.setAttribute("style","color:red; font-weight:bold");
+            }
+        }else{
+            pErrores.innerText = "Se ha producido un error al añadir el elemento."
+            pErrores.setAttribute("style","color:red; font-weight:bold");
+        }
+    })
+
 /**
  * Clases:
  *  TypeScript se trata de un lenguaje orientado a objetos y por ello nos permitirá trabajar con diferentes 
@@ -731,6 +771,7 @@ const liElementosQuery = document.querySelectorAll("#lista-contenidos>li");
 
 import {Curso} from "./models/Curso"
 import {Estudiante} from "./models/Estudiante"
+import { text } from 'stream/consumers';
 
 
 let cursoDAW = new Curso("Desarrollo de Aplicaciones Web",2000);
