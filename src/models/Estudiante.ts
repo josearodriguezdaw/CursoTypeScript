@@ -1,5 +1,5 @@
-import {Curso} from "./Curso"
-export class Estudiante {
+import Curso from "./Curso"
+export default class Estudiante {
 
     // Propiedades
     private nombre:string;

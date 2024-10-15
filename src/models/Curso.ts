@@ -1,4 +1,4 @@
-export  class Curso {
+export  default class Curso {
     readonly nombre:string;
     horas:number;
     

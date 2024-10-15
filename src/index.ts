@@ -154,17 +154,17 @@ type Administrador = {
     isAdmin: boolean;
 }
 
-type Empleado = {
+type Trabajador = {
     nombre: string;
     salario: number;
 }
 
-let empleado1: Empleado = {nombre:"Juan",salario:1500};
+let trabajador1: Trabajador = {nombre:"Juan",salario:1500};
 
 /* Intersección de datos: permite combinar dos o más tipos de datos en uno solo. 
 */
-let empleado2 : Empleado & Administrador;
-empleado2 = {isAdmin:true,nombre:"Jose",salario:2000};
+let trabajador2 : Trabajador & Administrador;
+trabajador2 = {isAdmin:true,nombre:"Jose",salario:2000};
 
 
 /**
@@ -175,7 +175,7 @@ empleado2 = {isAdmin:true,nombre:"Jose",salario:2000};
  *  de lo contrario, devuelve el valor de expr2.
  */  
 
-console.log (empleado1.salario > 1500 ? `El empleado ${empleado1.nombre} es Senior`: `El empleado ${empleado1.nombre} es Junior` )
+console.log (trabajador1.salario > 1500 ? `El empleado ${trabajador1.nombre} es Senior`: `El empleado ${trabajador1.nombre} es Junior` )
 
 
 
@@ -691,6 +691,8 @@ const div = document.getElementById("form-curso");
  * HTMLUListElement
  * HTMLLIElement
  * Cada uno de estos objetos de TypeScript tendrá las propiedades específicas del elemento HTML
+ * 
+ * 
  */
 
 // Accedemos al input.
@@ -712,6 +714,50 @@ const listaContenidosQuery = document.querySelector("#lista-contenidos");
 const liElementosQuery = document.querySelectorAll("#lista-contenidos>li");
 
 
+/**
+ * Métodos para acceder a los elementos del DOM
+ * Fuente: https://www.tutorialesprogramacionya.com/herramientas/javascript/domjs/
+ * 
+ * - parentElement : almacena la referencia del nodo elemento padre.
+ * - firstElementChild : almacena la referencia del primer nodo de tipo elemento hijo.
+ * - lastElementChild : almacena la referencia del último nodo hijo.
+ * - nextElementSibling : almacena la referencia al siguiente elemento hermano.
+ * - previousElementSibling : almacena la referencia al anterior elemento hermano.
+ * - children : almacena una colección con todos los elementos tipo nodo hijo.
+ */
+
+listaContenidos.firstElementChild; // Devuelve el primer elemento de la lista
+listaContenidos.lastElementChild; // Devuelve el último elemento de la lista
+listaContenidos.parentElement; //Devuelve el elemento padre de la lista. En este caso div.cuerpo-curso
+listaContenidos.nextElementSibling; //Devolvería nada ya que la lista no tiene más hermanos.
+listaContenidos.previousElementSibling // Devolvería el párrafo anterior a la lista, ya que es un hermano anterior.
+listaContenidos.children // Devuelve una referencia a todos los elementos hijos de la lista.
+
+/**
+ * Gestión de eventos:
+ * En ocasiones se desea realizar alguna acción cuando el usuario interactúa con la página web.
+ * Para ello, se usan los eventos. Un evento es una notificación de que ha ocurrido alguna acción en la página.
+ * Existen diferentes tipos de eventos que se pueden aplicar sobre cualquier elemento del DOM:
+ * 
+ * click - El usuario hace clic sobre el elemento.
+ * dblclick - El usuario hace doble clic sobre el elemento.
+ * keydown - El usuario presiona una tecla.
+ * keyup - El usuario libera la tecla.
+ * load - El documento termina su carga.
+ * mousedown - El usuario presiona el botón del ratón en un elemento.
+ * mousemove - El usuario mueve el puntero del ratón sobre un elemento.
+ * mouseout - El usuario mueve el puntero fuera de un elemento.
+ * mouseover - El usuario mantiene el puntero sobre un elemento.
+ * mouseup - El usuario libera el botón pulsado del ratón sobre un elemento.
+ * 
+ * Fuente: http://www.mywonderland.es/curso_js/addevent/index.html
+ * 
+ * Para gestionar eventos usaremos los siguientes métodos: 
+ * elemento.addEventListener('evento', funciónEjecutar) -> añade un evento a un elemento del DOM. Se pueden añadir varios eventos y funcionalidades a un mismo evento.
+ * elemento.removeEventListener('evento',funcionAsignada) -> elimina un evento de un elemento del DOM.
+ */
+
+//
 /** 
  * Ejemplo práctico acceso, manejo y eventos en el DOM.
  * El objetivo de este ejemplo práctico es trabajar con el DOM del archivo index.html
@@ -721,6 +767,7 @@ const liElementosQuery = document.querySelectorAll("#lista-contenidos>li");
  * Si la cadena de texto recuperada está vacía, se mostrará un mensaje de error.
  * 
  * */ 
+
 
 
     btnAddContent.addEventListener('click', (evento:Event) => {
@@ -752,6 +799,7 @@ const liElementosQuery = document.querySelectorAll("#lista-contenidos>li");
         }
     })
 
+
 /**
  * Clases:
  *  TypeScript se trata de un lenguaje orientado a objetos y por ello nos permitirá trabajar con diferentes 
@@ -769,17 +817,177 @@ const liElementosQuery = document.querySelectorAll("#lista-contenidos>li");
  *
 */
 
-import {Curso} from "./models/Curso"
-import {Estudiante} from "./models/Estudiante"
+import Curso from "./models/Curso"
+import Estudiante from "./models/Estudiante"
+import IPersona, { ESexo } from './models/interfaces/IPersona';
+import Sexo from './models/interfaces/IPersona';
+import { stringify } from 'querystring';
 import { text } from 'stream/consumers';
 
 
 let cursoDAW = new Curso("Desarrollo de Aplicaciones Web",2000);
 let cursoDAM = new Curso("Desarrollo de Aplicaciones Multiplataforma",2000);
 
-let listCursosMatriculados = [cursoDAM,cursoDAM];
+let listCursosMatriculados = [cursoDAM,cursoDAW];
 
 let alumnoJose = new Estudiante("Jose Antonio", listCursosMatriculados, "Rodriguez");
 alumnoJose.cursos.forEach((curso:Curso) => {console.log(`El alumno Jose está matriculado en el curso ${curso.nombre}`)})
 
 
+/**
+ * Herencias: 
+ * La herencia nos permitirá crear clases que partirán de otras clases ya existentes, es decir,
+ * cuando una clase B hereda de una Clase A, la clase B tendrá todos los atributos y métodos de su super clase, es decir de la clase A.
+ * 
+ * Fuente: https://www.tutorialesprogramacionya.com/angularya/detalleconcepto.php?codigo=25
+ * 
+ */
+
+class Persona {
+    // Con el modificador protected permitimos que la subclase pueda acceder a los atributos de la clase padre,
+    // pero, luego donde definamos un objeto de esta clase no los pueda acceder y permanezcan encapsulados.
+    protected nombre:string;
+    protected edad:number;
+
+    constructor(nombre:string, edad:number) {
+      this.nombre = nombre;
+      this.edad = edad;
+    }
+  
+    imprimir() {
+      console.log(`Nombre: ${this.nombre}`);
+      console.log(`Edad: ${this.edad}`);
+    }    
+  }
+  
+  class Empleado extends Persona {
+    private sueldo:number;
+    
+    constructor(nombre:string, edad:number, sueldo:number) {
+      super(nombre, edad);
+      this.sueldo = sueldo;
+    }
+  
+    imprimir() {
+      super.imprimir();
+      console.log(`Sueldo: ${this.sueldo}`);      
+    }
+  
+    pagaImpuestos() {
+      if (this.sueldo>5000)
+        console.log(`${this.nombre} debe pagar impuestos`);
+      else
+        console.log(`${this.nombre} no debe pagar impuestos`);
+    }
+    get getNombre():string{
+        return this.nombre;
+    }
+  }
+  
+  
+  const persona1=new Persona('Juan', 44);
+  persona1.imprimir();
+  
+  const empleado1=new Empleado('Ana', 22, 7000);
+  empleado1.imprimir();
+  empleado1.pagaImpuestos();
+
+
+  /**
+   * Clases abstractas:
+   * El objetivo de una clase abstracta es proporcionar una plantilla para otras clases. 
+   * Es una forma de definir una estructura común y comportamiento compartido, sin proporcionar implementaciones completas para todos los métodos.
+   * 
+   * Las clases abastractas no pueden usarse como instancias directa, solo pueden ser heredadas por otras clases.
+   * 
+   * Fuente: https://www.tutorialesprogramacionya.com/angularya/detalleconcepto.php?codigo=25
+   */
+
+  abstract class Operacion {
+    public valor1: number;
+    public valor2: number;
+    public resultado: number=0;
+  
+    constructor(v1:number, v2:number) {
+      this.valor1=v1;
+      this.valor2=v2;
+    }
+  
+    abstract operar():void;
+  
+    imprimir() {
+      console.log(`Resultado: ${this.resultado}`);
+    }
+  }
+
+  class Suma extends Operacion {
+    constructor(v1:number, v2:number) {
+      super(v1,v2);
+    }
+  
+    operar() {
+        this.resultado = this.valor1 + this.valor2;
+    }
+  }
+  
+  class Resta extends Operacion {
+    constructor(v1:number, v2:number) {
+      super(v1,v2);
+    }
+    
+    operar() {
+        this.resultado = this.valor1 - this.valor2;
+    }
+  }
+
+let suma1: Suma;
+suma1=new Suma(10, 4);
+suma1.operar();
+suma1.imprimir();
+
+let resta1: Resta;
+resta1=new Resta(10, 4);
+resta1.operar();
+resta1.imprimir();
+
+/**
+ * Interfaces:
+ * Una interface declara una serie de métodos y propiedades que deben ser implementados luego por una o más clases.
+ * Una clase nos va a definir la estructura que tendrá nuestro objeto.
+ * Las interfaces vienen a suplir la imposibilidad de herencia múltiple.
+ * 
+ * Por ejemplo podemos tener dos clases que representen un avión y un helicóptero. Luego plantear una interface con un método llamado volar. 
+ * Las dos clases pueden implementar dicha interface y codificar el método volar 
+ * (los algoritmos seguramente sean distintos pero el comportamiento de volar es común tanto a un avión como un helicóptero)
+ */
+
+type TPersona = {
+    nombre: string;
+    apellidos?: string | undefined;
+    edad: string | number;
+    sexo: ESexo;
+}
+
+export class Alumno implements IPersona{
+    nombre: string;
+    apellidos?: string | undefined;
+    edad: string | number;
+    sexo: ESexo;
+
+    constructor(nombre:string, edad:number|string,sexo:ESexo,apellidos?:string){
+        this.nombre = nombre;
+        this.apellidos = apellidos?apellidos:""
+        this.edad =edad;
+        this.sexo = sexo;
+    }
+    
+    convertTexto (alumno:Alumno):string {
+        return JSON.stringify(alumno);
+    };
+
+    textoToPersona(textAlumno: string) {
+        return JSON.parse(textAlumno);
+    }
+    
+
+}
